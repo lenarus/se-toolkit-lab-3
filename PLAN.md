@@ -196,14 +196,11 @@ Students implement baseline server hardening:
 - Create non-root SSH user for operations
 - Configure firewall (`ufw`)
 - Configure fail2ban
-- Disable root password login
-- Create dedicated `checkbot` SSH user (restricted, no sudo)
+- Disable root SSH login (`PermitRootLogin no`)
+- Disable password authentication for all SSH users (`PasswordAuthentication no`)
+- Create a dedicated `checkbot` SSH user (normal user account, no sudo)
 
 Goal: establish baseline operational security for deployment.
-
-Scope note:
-
-- If this task is too heavy, hardening details can move to Lab 4 while keeping API-key auth in Lab 3.
 
 Potential tests (provided by instructors):
 
@@ -244,18 +241,18 @@ Potential deployment checks (instructor/autochecker):
 
 ---
 
-## Open questions
+## Future ideas (not current scope)
 
-1. Hardening depth:
-Should we require `PasswordAuthentication no` for everyone, or allow key-only root-disabled minimum?
+1. Checkbot command restrictions:
+Keep `checkbot` as a normal SSH user in Lab 3.
+Future hardening idea: use a forced-command key in `authorized_keys` so `checkbot`
+can only run a verification script (with `no-pty`, `no-port-forwarding`,
+`no-agent-forwarding`, `no-X11-forwarding`).
 
-2. Checkbot restrictions:
-Command-restricted SSH key now, or in a later lab?
+2. CI in Lab 4:
+Add GitHub Actions to run backend tests and static checks on each PR.
+Combine with branch protection so merges require passing checks.
 
-3. CI placement:
-CI checks are a good candidate for Lab 4 if Lab 3 scope gets tight.
-
-4. Scope pressure:
-If needed, keep Task 5 required in Lab 3 and move part of Task 6 to Lab 4:
-- Lab 3: API-key auth (single key, no roles)
-- Lab 4: full hardening checklist + CI
+3. Scope rebalance (if lab becomes too heavy):
+Most likely material to move to Lab 4 is part of outcome/verification/mastery
+functionality. For now, current plan keeps all of it in Lab 3.

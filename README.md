@@ -99,14 +99,15 @@ These decisions answer the current planning open questions for the upcoming Lab 
 1. Hardening depth:
    We require baseline hardening in Lab 3:
    - `PermitRootLogin no`
-   - `PasswordAuthentication no`
+   - `PasswordAuthentication no` (for all SSH users)
    - non-root SSH user for operations
    - `ufw` enabled with required ports only
    - `fail2ban` enabled for SSH
 
 2. Checkbot restrictions:
-   In Lab 3, `checkbot` must be a dedicated no-sudo, key-only user.
-   Command-restricted SSH keys can be added in Lab 4 if Lab 3 scope gets too heavy.
+   In Lab 3, `checkbot` is a dedicated normal SSH user (no sudo).
+   Future hardening idea (Lab 4): command-restricted SSH keys in `authorized_keys`
+   so `checkbot` can only run verification commands.
 
 3. CI placement:
    CI is planned for Lab 4.
@@ -123,4 +124,5 @@ These decisions answer the current planning open questions for the upcoming Lab 
 
 6. Scope split if overloaded:
    - Lab 3 must keep API-key auth (single key, no roles).
-   - Advanced hardening details and CI can move to Lab 4 when needed.
+   - If rebalancing is needed, the most likely move to Lab 4 is part of
+     outcome/verification/mastery functionality.
