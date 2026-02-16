@@ -51,10 +51,11 @@ We intentionally skip advanced REST topics (HATEOAS, versioning strategy, cachin
 
 ## Story
 
-> "The data team already loaded real anonymized learning data into our DB.
-> Your job is to extend the API safely and correctly:
-> expose interaction logs, add item-outcome mappings, compute mastery,
-> secure the service, and deploy it on a hardened VM."
+> "The prototype works and is deployed.
+> Now we need to move it meaningfully closer to production:
+> strengthen the API contract, expose interaction logs,
+> add item-outcome mappings, implement and test mastery,
+> and deploy the service on a hardened VM."
 
 ---
 
